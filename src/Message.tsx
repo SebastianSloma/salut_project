@@ -1,13 +1,28 @@
 import { PropsWithChildren } from 'react';
 
+type MessageVariant = 'RIGHT' | 'LEFT';
+
 type MessageProps = PropsWithChildren<{
 	author: string;
+	variant?: MessageVariant;
 }>;
 
-export const Message = ({ author, children }: MessageProps) => {
+export const Message = ({
+	author,
+	children,
+	variant = 'RIGHT',
+}: MessageProps) => {
 	return (
-		<p>
-			<b>{author}</b>: {children}
+		<p
+			style={{
+				display : 'flex',
+				flexDirection: variant === 'RIGHT' ? 'row' : 'row-reverse',
+			}}
+		>
+			<b>
+				{author}
+			</b>
+			{''}: {children}
 		</p>
 	);
 };
