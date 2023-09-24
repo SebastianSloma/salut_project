@@ -1,22 +1,32 @@
 import { useState } from 'react';
 
+const useTodos<T> = (): [T[], (value: T) => void] => {
+	const [todos, setTodos] = useState<T[]>([]);
+
+	const addTodo = (value: T) => {
+		setTodos((curr) => [...curr, value]);
+	};
+	return [todos, addTodos];
+};
+
 export const Todos = () => {
-	const [todos, setTodos] = useState<string[]>(['Buen Dia']);
+	const [todos, addTodo] = useTodos<number>();
 
 	const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 
-		const elements = e.currentTarget.elements as typeof e.currentTarget.elements & {
-            todo?: HTMLInputElement
-        };
+		const elements = e.currentTarget
+			.elements as typeof e.currentTarget.elements & {
+			todo?: HTMLInputElement;
+		};
 
-        const todoValue = elements.todo?.value
+		const todoValue = elements.todo?.value;
 
-        if(!todoValue){
-            return
-        }
+		if (!todoValue) {
+			return;
+		}
 
-        setTodos(curr =>[...curr,todoValue])
+		addTodo(Number(todoValue));
 	};
 
 	return (
