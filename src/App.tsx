@@ -9,6 +9,7 @@ function App() {
    <div>
     <h1>Salut</h1>
     <Message author='Merlin'>TypeScript</Message>
+    <Message author='Julio'><span style={ color:"red" }>JavaScript</span></Message>
    </div>
   )
 }
